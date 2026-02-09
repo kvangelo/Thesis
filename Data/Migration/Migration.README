@@ -1,0 +1,45 @@
+## Migration Data Files
+
+### Primary Data Files
+
+1. **migration_cz_to_cz_1990_2022.csv**
+   - Unit of observation: CZ pair-year (origin-destination-year)
+   - Variables:
+     - `year`: Year of migration (1990-2021)
+     - `orig_cz`: Origin commuting zone (2000 definitions)
+     - `dest_cz`: Destination commuting zone
+     - `orig_cz_label`: Origin CZ name
+     - `dest_cz_label`: Destination CZ name
+     - `returns`: Number of migrant households
+     - `agi`: Aggregate adjusted gross income (thousands of dollars)
+     - `n_county_pairs`: Number of county-county flows aggregated
+   - Observations: [X]
+   - Use for: Flow analysis, gravity models, network analysis
+
+2. **migration_cz_network_summary_1990_2022.csv**
+   - Unit of observation: CZ-year
+   - Variables:
+     - `year`: Year
+     - `orig_cz`: Commuting zone
+     - `cz_label_short`: CZ name
+     - `total_outflows`: Total households leaving this CZ
+     - `total_inflows`: Total households arriving to this CZ
+     - `net_migration`: Inflows minus outflows
+     - `net_rate`: Net migration as proportion of outflows
+     - `n_destinations`: Number of CZs receiving migrants from this CZ
+     - `n_origins`: Number of CZs sending migrants to this CZ
+   - Observations: [X]
+   - Use for: CZ-level fixed effects models, time series analysis
+
+### Data Construction
+
+Source: IRS Statistics of Income County-to-County Migration Data
+Processing: See `migration_data_processing.R`
+CZ Crosswalk: `county_to_cz_xwalk_2000_enhanced.xlsx`
+
+### Notes
+
+- Within-CZ flows excluded
+- Suppressed values (returns = -1) removed
+- Aggregate geographic codes (96xxx, 97xxx, 98xxx) excluded
+- 2000 CZ definitions used throughout for consistency
